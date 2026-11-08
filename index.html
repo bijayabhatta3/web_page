@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bijaya Bhatta — Computer Engineer &amp; </title>
+<meta name="description" content="Bijaya Bhatta — Computer Engineer at Nepal Telecom, researcher in NLP, machine learning">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EEEBE2;
+    --paper-deep: #E4E0D3;
+    --ink: #17191C;
+    --ink-soft: #4B4E52;
+    --rule: #C9C2AE;
+    --red: #8C2A1E;
+    --red-soft: #8C2A1E99;
+    --teal: #2C5457;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --hand: 'Caveat', cursive;
+    --maxw: 760px;
+    --margin-w: 210px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--red);}
+  ::selection{background:var(--red); color:var(--paper);}
+
+  /* faint ruled-paper texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image: repeating-linear-gradient(
+      to bottom, transparent 0 38px, var(--rule) 38px 39px
+    );
+    opacity:.35;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .page{ position:relative; z-index:1; }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 32px;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--rule);
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .topbar .name{ font-weight:500; color:var(--ink);}
+  .topbar nav{ display:flex; gap:22px; }
+  .topbar nav a{ color:var(--ink-soft); text-decoration:none; }
+  .topbar nav a:hover{ color:var(--red); }
+  @media (max-width:640px){ .topbar nav{ display:none; } }
+
+  /* ---------- shared layout: main column + margin column ---------- */
+  .sheet{
+    max-width: calc(var(--maxw) + var(--margin-w) + 60px);
+    margin:0 auto;
+    padding: 0 28px;
+    display:grid;
+    grid-template-columns: 1fr var(--margin-w);
+    gap:60px;
+  }
+  .col-main{ max-width:var(--maxw); }
+  .col-margin{ position:relative; }
+  @media (max-width:900px){
+    .sheet{ grid-template-columns: 1fr; }
+    .col-margin{ display:none; }
+  }
+
+  .note{
+    font-family:var(--hand);
+    color:var(--red);
+    font-size:22px;
+    line-height:1.25;
+    position:relative;
+    padding-left:18px;
+    margin: 6px 0 34px;
+    opacity:0; transform:translateY(6px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .note.in-view{ opacity:1; transform:translateY(0); }
+  .note::before{
+    content:"";
+    position:absolute; left:0; top:6px; bottom:6px; width:2px;
+    background:var(--red-soft);
+  }
+  .note span.underline{
+    text-decoration: underline wavy var(--red-soft);
+    text-underline-offset:3px;
+  }
+
+  section{ padding: 70px 0; }
+  section + section{ border-top:1px solid var(--rule); }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin:0 0 14px;
+  }
+  h1,h2,h3{ font-family:var(--serif); font-weight:600; margin:0; color:var(--ink); }
+  h2{ font-size:28px; margin-bottom:22px; }
+  p{ margin:0 0 16px; color:var(--ink-soft); }
+  .lede{ color:var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-top:56px;
+  }
+  .hero .kicker{
+    font-family:var(--mono); font-size:12px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-soft);
+    display:flex; justify-content:space-between; border-bottom:1px solid var(--rule);
+    padding-bottom:14px; margin-bottom:34px;
+  }
+  .hero h1{
+    font-size:clamp(38px, 6vw, 58px);
+    line-height:1.05;
+    letter-spacing:-.01em;
+  }
+  .hero .role{
+    font-family:var(--serif); font-style:italic;
+    font-size:20px; color:var(--ink-soft); margin-top:14px;
+  }
+  .hero .lede-text{ font-size:17px; max-width:540px; margin-top:22px; }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:10px 28px;
+    margin-top:30px; font-family:var(--mono); font-size:13px; color:var(--ink-soft);
+  }
+  .hero-meta a{ text-decoration:none; border-bottom:1px solid var(--rule); }
+  .hero-meta a:hover{ border-color:var(--red); }
+  .hero-photo{
+    float:right;
+    width:auto; height:auto;
+    max-width:220px;
+    border:1px solid var(--rule);
+    margin:4px 0 20px 24px;
+  }
+
+  /* ---------- abstract ---------- */
+  .keywords{
+    font-family:var(--mono); font-size:13px; color:var(--ink-soft);
+    padding-top:16px; margin-top:10px; border-top:1px dashed var(--rule);
+  }
+  .keywords b{ color:var(--ink); font-weight:500; }
+
+  /* ---------- areas of inquiry ---------- */
+  .inquiry-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:34px 40px; }
+  @media (max-width:600px){ .inquiry-grid{ grid-template-columns:1fr; } }
+  .inquiry-item .tag{
+    font-family:var(--mono); font-size:12px; color:var(--red);
+    display:inline-block; margin-bottom:8px;
+  }
+  .inquiry-item h3{ font-size:18px; margin-bottom:8px; }
+  .inquiry-item p{ font-size:14.5px; margin-bottom:0; }
+
+  /* ---------- publications (bibliography) ---------- */
+  .biblio{ list-style:none; margin:0; padding:0; counter-reset:pub; }
+  .biblio li{
+    counter-increment:pub;
+    display:grid; grid-template-columns:38px 1fr; gap:14px;
+    padding:20px 0; border-bottom:1px solid var(--rule);
+  }
+  .biblio li:first-child{ padding-top:0; }
+  .biblio li::before{
+    content:"[" counter(pub) "]";
+    font-family:var(--mono); font-size:13px; color:var(--red);
+    padding-top:2px;
+  }
+  .biblio .pub-title{ font-family:var(--serif); font-size:17px; color:var(--ink); margin:0 0 4px; }
+  .biblio .pub-meta{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin:0 0 8px; }
+  .biblio .pub-desc{ font-size:14.5px; margin:0; }
+  .biblio a{ text-decoration:none; border-bottom:1px solid var(--rule); }
+  .biblio a:hover{ border-color:var(--red); }
+
+  /* ---------- education ---------- */
+  .edu-row{
+    display:grid; grid-template-columns:90px 1fr; gap:18px;
+    padding:18px 0; border-bottom:1px solid var(--rule);
+  }
+  .edu-row:first-child{ padding-top:0; }
+  .edu-row:last-child{ border-bottom:none; }
+  .edu-year{ font-family:var(--mono); font-size:13px; color:var(--red); padding-top:3px; }
+  .edu-degree{ font-family:var(--serif); font-size:17px; margin:0 0 2px; }
+  .edu-inst{ font-size:14px; color:var(--ink-soft); margin:0; }
+
+  /* ---------- now / pursuit ---------- */
+  .pursuit-box{
+    border:1px solid var(--rule);
+    background: color-mix(in srgb, var(--paper-deep) 60%, transparent);
+    padding:24px 26px;
+  }
+  .pursuit-box p{ font-size:15px; }
+  .pursuit-list{ margin:14px 0 0; padding-left:20px; font-size:14.5px; color:var(--ink-soft); }
+  .pursuit-list li{ margin-bottom:6px; }
+
+  /* ---------- certificates ---------- */
+  .cert-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+  @media (max-width:600px){ .cert-grid{ grid-template-columns:1fr; } }
+  .cert-card{
+    display:flex; align-items:flex-start; gap:14px;
+    border:1px solid var(--rule);
+    background: color-mix(in srgb, var(--paper-deep) 45%, transparent);
+    padding:18px 20px;
+    text-decoration:none;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .cert-card:hover{ border-color:var(--red); background: color-mix(in srgb, var(--paper-deep) 70%, transparent); }
+  .cert-card .cert-icon{
+    font-family:var(--mono); font-size:11px; color:var(--red);
+    border:1px solid var(--red-soft); border-radius:3px;
+    padding:3px 6px; margin-top:2px; flex-shrink:0;
+    text-transform:uppercase; letter-spacing:.04em;
+  }
+  .cert-card .cert-title{ font-family:var(--serif); font-size:16px; color:var(--ink); margin:0 0 4px; }
+  .cert-card .cert-meta{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); margin:0; }
+
+  /* ---------- contact / correspondence ---------- */
+  .corr{ display:flex; flex-wrap:wrap; gap:40px 60px; }
+  .corr-block .eyebrow{ margin-bottom:8px; }
+  .corr-block a, .corr-block span{
+    display:block; font-family:var(--mono); font-size:14px; color:var(--ink); margin-bottom:4px; text-decoration:none;
+  }
+  .corr-block a:hover{ color:var(--red); }
+
+  footer{
+    padding:30px 32px 40px;
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    border-top:1px solid var(--rule);
+  }
+
+  .fade-up{
+    opacity:0; transform:translateY(14px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .fade-up.in-view{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+    .note, .fade-up{ opacity:1 !important; transform:none !important; }
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--red); outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <div class="name">Bijaya Bhatta</div>
+    <nav>
+      <a href="#abstract">About</a>
+      <a href="#inquiry">Interests</a>
+      <a href="#publications">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#pursuit">New Plans</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="sheet">
+      <div class="col-main">
+        <div class="kicker">
+          <span>Curriculum Vitae · Working Draft, 2026</span>
+          <span>Kathmandu, Nepal</span>
+        </div>
+
+        <img class="hero-photo" src="images/photo_pp.jpg" alt="Portrait of Bijaya Bhatta">
+
+        <h1>Bijaya Bhatta</h1>
+        <p class="role">Learning data science, machine learning and NLP, one step at a time</p>
+        <p class="lede-text lede">I'm interested to learn........... </p>
+
+        <div class="hero-meta">
+          <span>M.Sc. Computer Engineering, 2024</span>
+          <a href="https://www.linkedin.com/in/bijaya-bhatta-155-/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="#contact">Correspondence ↓</a>
+        </div>
+      </div>
+      <div class="col-margin"></div>
+    </div>
+  </section>
+
+  <!-- ABSTRACT -->
+  <section id="abstract">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">01 — Abstract</p>
+        <h2>About</h2>
+        <p class="lede">Mathematics was my favorite subject in school and I enjoy solving problems. I have a curious nature of learning things in detail till I do not get satisfied . 
+          I have completed my Master Degree in Computer Engineering in Data Science and Analytics. My thesis was on Nepali texts summarization, which is a low resource language. My project work was on Loan Default Prediction using Machine Learning Tecniques. I am interested in machine learning and I am in my journey to learn and explore more about it.</p>
+        <div class="keywords">
+          <b>Interests —</b> Data Science · Natural Language Processing · Machine Learning · Image Processing  · Deep Learning
+        </div>
+      </div>
+      <div class="col-margin">
+        <div class="note">Just a student.<br>Learning.<br><span class="underline">Seeking Growth.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS OF INQUIRY -->
+  <section id="inquiry">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">02 — Interests</p>
+        <h2>What I want to learn more of</h2>
+        <div class="inquiry-grid">
+          <div class="inquiry-item">
+            <span class="tag">NLP</span>
+            <h3>Low-resource language models</h3>
+            <p>My thesis worked with transformer architectures for Nepali — a language with little existing NLP tooling. It's the area I understand best, and the one I'd want to explore first.</p>
+          </div>
+          <div class="inquiry-item">
+            <span class="tag">DATA SCIENCE</span>
+            <h3>Applied predictive modelling</h3>
+            <p>Boosting and ensemble methods for credit risk and default prediction — hands-on work, not deep theory, but it's where I first got comfortable with a full modelling pipeline.</p>
+          </div>
+          <div class="inquiry-item">
+            <span class="tag">COMPUTER VISION</span>
+            <h3>Medical image classification</h3>
+            <p>Earlier coursework applying CNN architectures (AlexNet, VGG-16) to diagnostic imaging — malaria and blood cancer detection.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-margin">
+        <div class="note">Not an expert<br>in any of these —<br><span class="underline">just genuinely interested.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">03 — Record</p>
+        <h2>Publications &amp; projects</h2>
+        <ul class="biblio">
+          <li>
+            <div>
+              <p class="pub-title">NepaliBART: Nepali Text Summarization using BART Transformer</p>
+              <p class="pub-meta">Master's Thesis · Computer Engineering · 2024</p>
+              <p class="pub-desc">Fine-tuned a BART-based transformer for abstractive summarization of Nepali text, addressing the shortage of NLP tooling for the language.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p class="pub-title">Enhancing Default Prediction using Boosting-based ML Techniques</p>
+              <p class="pub-meta">14th IOE Graduate Conference · Published Paper · 2023</p>
+              <p class="pub-desc">Compared boosting algorithms for loan default prediction. <a href="https://conference.ioe.edu.np/publications/ioegc14/IOEGC-14-164-PS1-022-504.pdf" target="_blank" rel="noopener">Read the paper ↗</a></p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p class="pub-title">Comparison of ML Algorithms for Loan Default Prediction using SMOTE</p>
+              <p class="pub-meta">IOE Graduate Conference · Poster Presentation · 2023</p>
+              <p class="pub-desc">Evaluated SMOTE-based resampling against class imbalance in credit default datasets. <a href="images/poster-loan-default-smote.jpg" target="_blank" rel="noopener">View poster ↗</a></p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p class="pub-title">Malaria Detection and Performance Evaluation using AlexNet and VGG-16</p>
+              <p class="pub-meta">Bachelor's Major Project · 2021</p>
+              <p class="pub-desc">Benchmarked two CNN architectures for automated malaria detection from blood smear images.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <p class="pub-title">Blood Cancer Detection using Image Processing</p>
+              <p class="pub-meta">Bachelor's Minor Project · SET Conference, Advanced College of Engineering &amp; Management · 2020</p>
+              <p class="pub-desc">Image-processing pipeline for detecting blood cancer indicators, presented as a poster at the SET conference. <a href="images/poster-blood-cancer-detection.pdf" target="_blank" rel="noopener">View poster ↗</a></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-margin">
+        <div class="note">Nothing fancy —<br>just what I've<br>actually <span class="underline">built and finished.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">04 — Record</p>
+        <h2>Education</h2>
+    
+        <div class="edu-row">
+          <div class="edu-year">2024</div>
+          <div>
+            <p class="edu-degree">M.Sc. Computer Engineering, Tribhuvan University</p>
+            <p class="edu-inst">Specialization in Data Science and Analytics. Thesis: "NepaliBART," supervised by Dr. Arun Kumar Timalsina. Grade: 87.27%.</p>
+          </div>
+        </div>
+        <div class="edu-row">
+          <div class="edu-year">2021</div>
+          <div>
+            <p class="edu-degree">Bachelor's Degree, Computer Engineering</p>
+            <p class="edu-inst">Tribhuvan University. Project: Malaria Detection using AlexNet and VGG-16. Grade: 73.72%.</p>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">05 — Work</p>
+        <h2>Experience</h2>
+        <div class="edu-row">
+          <div class="edu-year">2023–now</div>
+          <div>
+            <p class="edu-degree">Computer Engineer, Nepal Telecom (Nepal Doorsanchar Company Ltd.)</p>
+            <p class="edu-inst">Recruited via the Public Service Commission's competitive exam. Work spans SIEM, the email system, AAA services, and second-line FTTH support.</p>
+          </div>
+        </div>
+        <div class="edu-row">
+          <div class="edu-year">2022–2023</div>
+          <div>
+            <p class="edu-degree">Computer Engineer, Government of Nepal</p>
+            <p class="edu-inst">Recruited via the Public Service Commission's competitive exam. Worked in the Public Procurement Monitoring Office on the e-government procurement system. It was a short term experience for about 4-5 months.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS & AWARDS -->
+  <section id="skills">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">06 — Toolkit</p>
+        <h2>Skills &amp; recognition</h2>
+        <div class="inquiry-grid">
+          <div class="inquiry-item">
+            <span class="tag">PROGRAMMING</span>
+            <h3>Python, Linux</h3>
+            <p>Comfortable, not expert — I can build and debug a working pipeline.</p>
+          </div>
+          <div class="inquiry-item">
+            <span class="tag">TOOLS</span>
+            <h3>PyTorch, TensorFlow, Git, IBM SPSS</h3>
+            <p>Used across my thesis work and applied ML projects.</p>
+          </div>
+          <div class="inquiry-item">
+            
+          </div>
+          <div class="inquiry-item">
+            <span class="tag">2022</span>
+            <h3>Merit-wise Scholarship</h3>
+            <p>Institute of Engineering, Pulchowk Campus.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-margin">
+        <div class="note">Know-hows, yes.<br><span class="underline">Mastery, not yet.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEYOND WORK -->
+  <section id="beyond">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">07 — Off the Record</p>
+        <h2>Beyond work</h2>
+        <p class="lede">When I'm not at a desk, I like listening to music and travelling around Nepal. It's a small country, but a varied one — you can go from Kathmandu's temples to hill villages to the Himalaya foothills in the space of a few hours' drive. And if you ever get the chance to visit Nepal, take it — it really is a beautiful country, and the people are as much a reason to come as the mountains are.</p>
+      </div>
+      <div class="col-margin">
+        <div class="note">Come for the<br>Himalaya.<br><span class="underline">Stay for the people.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">08 — Record</p>
+        <h2>Certificates</h2>
+        <p class="lede">Short courses and training completed alongside my degrees and work.</p>
+        <div class="cert-grid">
+          <a class="cert-card" href="images/coursera-linear-algebra.pdf" target="_blank" rel="noopener">
+            <span class="cert-icon">PDF</span>
+            <div>
+              <p class="cert-title">Mathematics for Machine Learning: Linear Algebra</p>
+              <p class="cert-meta">Imperial College  London · Coursera · Aug 2022</p>
+            </div>
+          </a>
+          <a class="cert-card" href="images/coursera-multivariate-calculus.pdf" target="_blank" rel="noopener">
+            <span class="cert-icon">PDF</span>
+            <div>
+              <p class="cert-title">Mathematics for Machine Learning: Multivariate Calculus</p>
+              <p class="cert-meta">Imperial College London · Coursera · Aug 2022</p>
+            </div>
+          </a>
+          <a class="cert-card" href="images/certificate-data-science-infography.png" target="_blank" rel="noopener">
+            <span class="cert-icon">IMG</span>
+            <div>
+              <p class="cert-title">Data Science Certification Training</p>
+              <p class="cert-meta">Infography Technologies · 45-hour training · Mar 2022</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-margin">
+        <div class="note">Small proofs,<br>steadily<br><span class="underline">stacked up.</span></div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sheet">
+      <div class="col-main">
+        <p class="eyebrow">10 — Correspondence</p>
+        <h2>Get in touch</h2>
+        <p class="lede">Open to conversations about Nepal Telecom and Nepal's data science scene.</p>
+        <div class="corr">
+          <div class="corr-block">
+            <p class="eyebrow">Email</p>
+            <a href="mailto:bijayabhatta155@gmail.com">bijayabhatta155@gmail.com</a>
+          </div>
+          <div class="corr-block">
+            <p class="eyebrow">Elsewhere</p>
+            <a href="https://www.linkedin.com/in/bijaya-bhatta-155-/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+          <div class="corr-block">
+            <p class="eyebrow">Location</p>
+            <span>Kathmandu, Nepal</span>
+          </div>
+          <div class="corr-block">
+            <p class="eyebrow">References</p>
+            <span>Available on request</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-margin"></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Bijaya Bhatta</span>
+    <span>Last revised — July 2026</span>
+  </footer>
+
+</div>
+
+<script>
+  // Reveal marginalia notes and fade-up blocks as they enter view
+  const observed = document.querySelectorAll('.note, .fade-up');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    observed.forEach(el => io.observe(el));
+  } else {
+    observed.forEach(el => el.classList.add('in-view'));
+  }
+</script>
+
+</body>
+</html>
